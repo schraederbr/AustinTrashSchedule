@@ -46,8 +46,12 @@ def getID(address = '8808 Piney Point Dr B'):
         data = json.loads(response.text)
         place_id = data[0]['place_id']
     except Exception as e:
-        # print(e)
-        return ""
+        try:
+            response = json.loads(response.text)
+            json.loads(response.text)[0].get('name', None)
+        except Exception as e:
+            print(e)
+            return ""
     
     print(place_id) 
     return place_id
@@ -99,8 +103,8 @@ def getSchedule(id = "67054DEA-DF5A-11E8-B930-1A2C682931C6", start = date.today(
                 if "dates" in event["options"]:
                     return event["options"]["dates"]
     except Exception as e:
-        # print(e)
-        return []
+        print(e)
+        return None
 
 
 # def sampleAddresses(file_name,file_name_2):
@@ -115,20 +119,21 @@ def getSchedule(id = "67054DEA-DF5A-11E8-B930-1A2C682931C6", start = date.today(
 #         i += 1
 #     sample_df.to_csv(file_name_2) 
 
-def sampleAddresses(file_name,file_name_2):
+def sampleAddresses(file_name,file_name_2, count=20):
     address_df = pd.read_csv(file_name)
-    sample_df = address_df.sample(n=20)
+    sample_df = address_df.sample(n=count)
     sample_df.insert(loc=0, column='TRASH_DATE', value=None)
     for i, row in sample_df.iterrows():
         address_s = row['FULL_STREET_NAME']
         trash_date = getSchedule(getID(address_s))
         sample_df.at[i, 'TRASH_DATE'] = trash_date
+    sample_df = sample_df.dropna(subset=['TRASH_DATE'])    
     sample_df.to_csv(file_name_2)
 
 
 def main():
     # print(getSchedule(getID('2103 Robinhood Trl, Austin')))
-    sampleAddresses("Addresses.csv","sample.csv")
+    sampleAddresses("Addresses.csv","sample.csv", 20)
 
 
 
