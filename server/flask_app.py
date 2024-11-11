@@ -37,13 +37,13 @@ def home():
         <form action="/download_samples" method="get">
             <button type="submit">Download CSV Files</button>
         </form>
-        <form action="/run_async_task" method="post">
-            <button type="submit">Reload Database (May take awhile)</button>
-        </form>
         <h2>Map Links</h2>
         <ul>
             {}
         </ul>
+        <form action="/reload_database" method="post">
+            <button type="submit">Reload Database (May take awhile)</button>
+        </form>
     </body>
     </html>
     """
@@ -75,8 +75,8 @@ def download_samples():
     else:
         return "Samples folder does not exist.", 404
 
-@app.route('/run_async_task', methods=['POST'])
-def run_async_task():
+@app.route('/reload_database', methods=['POST'])
+def reload_database():
     os.chdir(trash_path)
     asyncio.run(main())
     return redirect(url_for('home'))

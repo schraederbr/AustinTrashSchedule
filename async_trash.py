@@ -113,7 +113,7 @@ async def processAddress(session, dataframe, row_index, address):
 async def main():
     print("Starting")
     async with aiohttp.ClientSession() as session:
-        await sampleAddresses(session, 1000)
+        await sampleAddresses(session, 10000)
     splitByTrashDate(SAMPLE_FILE)
     print("Done")
 
