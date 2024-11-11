@@ -107,18 +107,6 @@ def getSchedule(id = "67054DEA-DF5A-11E8-B930-1A2C682931C6", start = date.today(
         return None
 
 
-# def sampleAddresses(file_name,file_name_2):
-#     address_df= pd.read_csv(file_name)
-#     sample_df= address_df.sample(n=100)
-#     i = 0
-#     sample_df.insert(loc = 0, column = 'TRASH_DATE', value = None)
-#     for row in sample_df.rows:
-#         address_s= row['FULL_STREET_NAME']
-#         trash_date= getSchedule(getID(address_s))
-#         sample_df['TRASH_DATE'][i]= trash_date
-#         i += 1
-#     sample_df.to_csv(file_name_2) 
-
 def sampleAddresses(file_name,file_name_2, count=20):
     address_df = pd.read_csv(file_name)
     sample_df = address_df.sample(n=count)
@@ -133,12 +121,7 @@ def sampleAddresses(file_name,file_name_2, count=20):
 
 def main():
     # print(getSchedule(getID('2103 Robinhood Trl, Austin')))
-    sampleAddresses("Addresses.csv","sample.csv", 20)
-
-
-
-
-
+    sampleAddresses("Addresses.csv","sample.csv", 1000)
 
 if __name__ == "__main__":
     main()
