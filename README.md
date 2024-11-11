@@ -1,5 +1,8 @@
 # AustinTrashSchedule
-Getting the dates and location of bulk trash collection in the city of Austin Texas.
+Interactive site displaying bulk trash collection maps in Austin Texas. 
 
-Interactive version here: https://schraederbr.pythonanywhere.com/
+Available here: https://schraederbr.pythonanywhere.com/
+
+[![Map Showing Bulk Trash Pickup Location](README_Preview.PNG)](https://schraederbr.pythonanywhere.com/)
+
 
